@@ -25,7 +25,7 @@ const NavBar = () => {
 
                         <ul className="navbar-nav ms-auto d-flex">
                             <li className="nav-item">
-                                <Link className="nav-link txt-color" to="/main/">Home</Link>
+                                <Link className="nav-link txt-color" to="/main/home">Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link txt-color" to="/main/login">Login</Link>
