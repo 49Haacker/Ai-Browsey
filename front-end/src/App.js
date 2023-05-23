@@ -11,6 +11,7 @@ import AdminDashbord from './component/Admin/AdminDashbord';
 import AdminProfile from './component/Admin/AdminProfile';
 import User from './component/User';
 import ImageModelTrainer from './component/User/ImageModelTrainer';
+import PoseTrainer from './component/User/PoseTrainer';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           </Route>
           <Route path='user' element={<User />} >
             <Route path='imageModelTrainer' element={<ImageModelTrainer />} />
+            <Route path='PoseTrainer' element={<PoseTrainer />} />
           </Route>
 
         </Routes>
