@@ -18,4 +18,11 @@
     font-size: 1.4em;
 }
 
-/* Carasole caption  */
+/* NavBar css  */
+
+[data-bs-theme="dark"] {
+    background: linear-gradient(90deg, rgb(28 80 42) 0%, rgb(1 1 72) 22%, rgb(140 51 178) 91%);
+    color: #ffffff;
+}
+
+
