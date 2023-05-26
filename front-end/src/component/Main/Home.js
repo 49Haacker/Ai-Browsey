@@ -29,14 +29,14 @@ const Home = () => {
             <a href="https://p5js.org/" className="mt-3">
               <img src="https://p5js.org/assets/img/p5js.svg" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
             </a>
-            <a href="https://www.tensorflow.org/js" className="mt-3">
-              <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/tensorflow_logo_icon_168671.png" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
-            </a>
-            <a href="https://coral.ai/" className="mt-3">
+            {/* <a href="https://coral.ai/" className="mt-3">
+              <img src="https://coral.ai/" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
+            </a> */}
+            <a href="https://www.framer.com/" className="mt-3">
               <img src="https://cdn.iconscout.com/icon/free/png-256/free-framer-logo-3609961-3014601.png" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
             </a>
-            <a href="https://www.tensorflow.org/js" className="mt-3">
-              <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/tensorflow_logo_icon_168671.png" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
+            <a href="https://nodejs.org/en" className="mt-3">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6QgL46k3chitOCQHOHCOvyGBZDZY8ZvO6dwQO1CsB0w&s" alt="TensorFlow" className="w-100" style={{ height: '3rem' }} />
             </a>
           </div>
         </div>
