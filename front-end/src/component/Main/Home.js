@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
       <div className="container d-flex mt-3 w-75 flexRevrse">
-        <div style={{ padding: "0 113px" }}>
+        <div className="resHomePadding" style={{ padding: "0 113px" }}>
           <h1
             className="RfontSize"
             style={{ fontSize: "4.775em", marginBottom: "33px" }}
@@ -77,7 +77,7 @@ const Home = () => {
             </Link>
           </div>
         </div>
-        <div className="d-flex" style={{ height: "36rem" }}>
+        <div className="d-flex resHeightHomeVide" style={{ height: "36rem" }}>
           <video
             src="https://teachablemachine.withgoogle.com/assets/prediction.mp4"
             autoPlay

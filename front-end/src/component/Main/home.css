@@ -1,47 +1,67 @@
 .height-main-video {
-  height: 33rem;
+    height: 33rem;
 }
 
 .height-main-video iframe {
-  width: 70%;
-  border-radius: 13px;
+    width: 70%;
+    border-radius: 13px;
 }
 
 .svg-icon-img img {
-  height: 1.5rem;
-  margin: 30px 20px 0 0;
-  padding: 6px 20px 0 0;
+    height: 1.5rem;
+    margin: 30px 20px 0 0;
+    padding: 6px 20px 0 0;
 }
 
 .mt-secon-div {
-  margin-top: 13rem;
+    margin-top: 13rem;
 }
 
 /* media query for responsiveness  */
 @media only screen and (max-width: 1110px) {
-  .flexRevrse {
-    flex-wrap: wrap-reverse;
-    justify-content: center;
-  }
+    .flexRevrse {
+        flex-wrap: wrap-reverse;
+        justify-content: center;
+    }
 }
 
-@media only screen and (max-width: 1441px) {
-  .RfontSize {
-    font-size: 2.775em !important;
-  }
+/* @media only screen and (max-width: 1441px) {
+    .RfontSize {
+        font-size: 2.775em !important;
+    }
+} */
+
+@media only screen and (max-width: 552px) {
+    .resHeightHomeVide {
+        height: 22rem !important;
+    }
+
+    .resHomePadding {
+        padding: 0 0 !important;
+    }
 }
+
+@media only screen and (max-width: 441px) {
+    .resBtnNavbarMrgin {
+        font-size: 2em !important;
+        margin: 0px 10px !important;
+    }
+}
+
+/* @media only screen and (max-width: 552px) {} */
 
 /* navbar style */
 .navWidthCstom {
-  width: 19%;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  height: 5rem;
+    /* width: 19%; */
+    /* border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px; */
+    height: 5rem;
 }
 
 .navLinkFontSize {
-  font-size: 2.5em;
+    font-size: 2.5em;
 }
+
 .navAllLinkFontSize {
-  font-size: 1.45em;
+    font-size: 1.45em;
 }

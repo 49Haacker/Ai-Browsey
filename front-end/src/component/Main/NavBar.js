@@ -4,15 +4,15 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
   return (
     <nav className="navbar sticky-top navWidthCstom" data-bs-theme="dark">
-      <div className="container-fluid d-flex flex-row-reverse">
-        <Link className="navbar-brand text-white navLinkFontSize" to="/main/home/">
+      <div className="container-fluid d-flex">
+        {/* <Link className="navbar-brand text-white navLinkFontSize" to="/main/home/">
           AI Browsey
-        </Link>
+        </Link> */}
         {/* <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button> */}
         <button
-          class="navbar-toggler"
+          class="navbar-toggler d-flex justify-content-center align-items-center"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasWithBothOptions"
@@ -20,6 +20,8 @@ const NavBar = () => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
+          <Link className="navbar-brand text-white navLinkFontSize resBtnNavbarMrgin" style={{ margin: '0px 74px' }}>AI Browsey
+          </Link>
         </button>
 
         <div
