@@ -19,7 +19,6 @@ function App() {
   return (
     <>
       <BrowserRouter>
-
         <Routes>
           <Route path='/' element={<Navigate to="/main/" />} />
           <Route path='main' element={<Main />}>
@@ -38,7 +37,6 @@ function App() {
             <Route path='poseModelTrainer' element={<PoseModelTrainer />} />
             <Route path='PoseTrainer' element={<PoseTrainer />} />
           </Route>
-
         </Routes>
       </BrowserRouter>
     </>
