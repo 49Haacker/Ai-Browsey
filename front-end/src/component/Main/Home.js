@@ -90,7 +90,7 @@ const Home = () => {
 
       <div div className="container mt-secon-div d-flex flex-column">
         <h1 className="text-center" id="posterImage">
-          What is Teachable Machine?
+          What is AI Browsey?
         </h1>
         <div className="embed-responsive embed-responsive-21by9 d-flex justify-content-center mt-5 height-main-video">
           <iframe
@@ -107,7 +107,7 @@ const Home = () => {
         </div>
         <div className="rwo d-flex justify-content-center align-items-center w-50 m-auto">
           <p className="mt-5 fw-bolder text-center">
-            Teachable Machine is a web-based tool that makes creating machine
+            AI Browsey is a web-based tool that makes creating machine
             learning models fast, easy, and accessible to everyone. (Note: you
             can find the{" "}
             <Link to="https://teachablemachine.withgoogle.com/v1">
