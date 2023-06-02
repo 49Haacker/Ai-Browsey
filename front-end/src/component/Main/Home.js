@@ -125,7 +125,7 @@ const Home = () => {
         <h1>How do I use it?</h1>
         <div class="row row-cols-3 g-3 mt-5 w-75">
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <img
                 src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/collect.svg"
                 class="card-img-top"
@@ -156,7 +156,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <img
                 src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/train.svg"
                 class="card-img-top"
@@ -188,12 +188,11 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card align-items-end">
+            <div class="card align-items-end h-100">
               <img
                 src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/export.svg"
                 class="card-img-top"
                 alt="Los Angeles Skyscrapers"
-                style={{ width: "64.8%" }}
               />
               <div class="card-body">
                 <h5 class="card-title">Card title</h5>
@@ -216,6 +215,67 @@ const Home = () => {
                     <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
                   </svg>
                 </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="container-lg d-flex justify-content-center align-items-center flex-column"
+        style={{ marginTop: "17rem" }}
+      >
+        <h1>What can I use to teach it?</h1>
+        <p className="mt-5 fw-bolder text-center w-50">
+          Teachable Machine is flexible – use files or capture examples live.
+          It’s respectful of the way you work. You can even choose to use it
+          entirely on-device, without any webcam or microphone data leaving your
+          computer.
+        </p>
+        <div class="row row-cols-3 g-3 mt-5 w-75">
+          <div class="col">
+            <div class="card">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-images.png"
+                class="card-img-top"
+                alt="Hollywood Sign on The Hill"
+              />
+              <div class="card-body">
+                <h1 class="card-title">Images</h1>
+                <p class="card-text">
+                  Teach a model to classify images using files or your webcam.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-sounds.png"
+                class="card-img-top"
+                alt="Palm Springs Road"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Sounds</h5>
+                <p class="card-text">
+                  Teach a model to classify audio by recording short sound
+                  samples.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card align-items-end">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-poses.png"
+                class="card-img-top"
+                alt="Los Angeles Skyscrapers"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Poses</h5>
+                <p class="card-text">
+                  Teach a model to classify body positions using files or
+                  striking poses in your webcam.
+                </p>
               </div>
             </div>
           </div>
