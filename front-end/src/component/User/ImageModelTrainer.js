@@ -1,11 +1,55 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs";
 // import '@tensorflow/tfjs-node';
 import * as mobilenet from "@tensorflow-models/mobilenet";
 import {categoricalCrossentropy} from '@tensorflow/tfjs-layers/dist/exports_metrics';
 
+const imageList1 = [
+  'apple-1.jpg',
+  'apple-2.jpg',
+  'apple-3.jpg',
+  'apple-4.jpg',
+  'apple-5.jpg',
+  'orange-1.jpg',
+  'orange-2.jpg',
+  'orange-3.jpg',
+  'orange-4.jpg',
+  'orange-5.jpg',
+]
+
+const label_x1 = [1,1,1,1,1,0,0,0,0,0];
+const label_x2 = [0,0,0,0,0,1,1,1,1,1];
+
+const imageList2 = [
+  'orange-1.jpg',
+  'orange-2.jpg',
+  'orange-3.jpg',
+  'orange-4.jpg',
+  'orange-5.jpg',
+]
+
+const classes  = ['apple','apple','apple','apple','apple','orange','orange','orange','orange','orange'];
+
 const ImageModelTrainer = () => {
+
+  const [batchSize, setBatchSize] = useState(5);
+
+  const train =  async () =>
+  { 
+    const {images, targets} = generateData();
+    // this.ProgressBarValue=35;
+    console.log("Images are loaded into the memory as tensor !","Close");
+
+    const mobilenetModified = await getModifiedMobilenet();
+    // this.ProgressBarValue=50;
+    console.log("Modefiled Mobilenet AI Model is loaded !","Close");
+
+    await fineTuneModifiedModel(mobilenetModified,images,targets);
+    console.log("Model training is completed !","Close");
+    // this.ProgressBarValue=100;
+  }
+
   const getModifiedMobilenet = async () => {
     const trainableLayers = [
       "denseModified",
@@ -56,20 +100,6 @@ const ImageModelTrainer = () => {
     return imageTensor;
   };
 
-  const initClassifier = async () => {
-    const model = await mobilenet.load();
-
-    // Prepare your image dataset and labels
-    const images = [document.getElementById("my-image")]; // Array of image tensors
-    const labels = ["apple"]; // Array of corresponding labels
-
-    // Convert images and labels into tensors
-    const imageTensors = images.map((img) => tf.browser.fromPixels(img));
-    const labelTensors = tf.tensor(labels);
-
-    // Train the model
-    await model.fit(tf.stack(imageTensors), labelTensors);
-  };
 
   const freezeModelLayers = (trainableLayers,mobilenetModified) =>
   {
@@ -88,19 +118,212 @@ const ImageModelTrainer = () => {
     return mobilenetModified;
   }
 
+  const fineTuneModifiedModel =  async (model,images,targets) =>
+  {
+    function onBatchEnd(batch, logs) 
+    {
+      console.log('Accuracy', logs.acc);
+      console.log('CrossEntropy', logs.ce);
+      console.log('All', logs);
+    }
+    console.log('Finetuning the model...');
+
+    await model.fit(images, targets, 
+    {
+      epochs: 5,
+      batchSize: 24,
+      validationSplit: 0.2,
+      callbacks: {onBatchEnd}
+   
+    }).then(info => {
+      // console.log
+      console.log('Final accuracy', info.history.acc);
+      console.log('Cross entropy', info.ce);
+      console.log('All', info);
+      console.log('All', info.history['acc'][0]);
+      
+      for ( let k = 0; k < 5; k++) 
+    {
+      console.log({acc: 0, ce: 0 , loss: 0});
+
+      console.log('acc', info.history['acc'][k]);
+      console.log('ce',info.history['ce'][k]);
+      console.log('loss',info.history['loss'][k]); 
+      // this.traningMetrics.push({acc: 0, ce: 0 , loss: 0});
+
+      // this.traningMetrics[k].acc=info.history['acc'][k];
+      // this.traningMetrics[k].ce=info.history['ce'][k];
+      // this.traningMetrics[k].loss=info.history['loss'][k]; 
+    }
+      images.dispose();
+      targets.dispose();
+      model.dispose();
+    });;
+  
+  }
+
+  function parseImages(batchSize)
+  {
+    if (this.isImagesListed) 
+    {
+      this.isImagesListPerformed=false;
+      return;
+    }
+
+    let allTextLines = this.csvContent.split(/\r|\n|\r/);
+    
+    const csvSeparator = ',';
+    const csvSeparator_2 = '.';
+    
+    for ( let i = 0; i < batchSize; i++) 
+    {
+      // split content based on comma
+      const cols = allTextLines[i].split(csvSeparator);
+      
+      this.tableRows.push({ImageSrc: '', LabelX1: 0 , LabelX2: 0, Class: ''});
+
+      if (cols[0].split(csvSeparator_2)[1]=="png") 
+      {  
+        
+        if (cols[1]=="Uninfected") 
+        { 
+          this.label_x1.push(Number('1'));
+          this.label_x2.push(Number('0'));
+
+          this.tableRows[i].ImageSrc="../assets/"+ cols[0];
+          this.tableRows[i].LabelX1=1;
+          this.tableRows[i].LabelX2=0;
+          this.tableRows[i].Class="Uninfected";
+        } 
+
+        if (cols[1]=="Parasitized") 
+        { 
+          this.label_x1.push(Number('0'));
+          this.label_x2.push(Number('1'));
+      
+          this.tableRows[i].ImageSrc="../assets/"+ cols[0];
+          this.tableRows[i].LabelX1=0;
+          this.tableRows[i].LabelX2=1;
+          this.tableRows[i].Class="Parasitized";
+        } 
+
+      } 
+    }
+    this.table.renderRows();
+    this.dataSource.paginator = this.paginator;
+    
+    this.isImagesListed=true;
+    this.isImagesListPerformed=true;
+  }
+
+  function generateData ()
+  {
+    const imageTensors = [];
+    const targetTensors = [];
+
+    // let allTextLines = this.csvContent.split(/\r|\n|\r/);
+    
+    // const csvSeparator = ',';
+    // const csvSeparator_2 = '.';
+
+    for(let i= 0 ; i < batchSize ; i++){
+      const imageTensor = capture(imageList1[i]);
+      let targetTensor =tf.tensor1d([label_x1[i],label_x2[i]]);
+
+      targetTensor.print();
+      imageTensors.push(imageTensor);
+      targetTensors.push(targetTensor);
+
+      imageTensor.print(true);
+    }
+
+    const images = tf.stack(imageTensors);
+    const targets = tf.stack(targetTensors);
+
+    return {images, targets};
+    
+    // for ( let i = 0; i < batchSize; i++) 
+    // {
+    //   // split content based on comma
+    //   const cols = allTextLines[i].split(csvSeparator);
+    //   console.log(cols[0].split(csvSeparator_2)[0])
+
+    //   if (cols[0].split(csvSeparator_2)[1]=="png") 
+    //   {
+    //     console.log(i)
+    //     const imageTensor = this.capture(i);
+    //     let targetTensor =tf.tensor1d([this.label_x1[i],this.label_x2[i]]);
+
+    //     targetTensor.print();
+    //     imageTensors.push(imageTensor);
+    //     targetTensors.push(targetTensor);
+  
+    //     imageTensor.print(true);
+    //   } 
+    // }
+    // const images = tf.stack(imageTensors);
+    // const targets = tf.stack(targetTensors);   
+
+    // return {images, targets};
+  }
+
+  function capture(imgId) 
+  {
+    // Reads the image as a Tensor from the <image> element.
+    const picture = document.getElementById(imgId);
+    const trainImage = tf.browser.fromPixels(picture);
+
+    // Normalize the image between -1 and 1. The image comes in between 0-255,
+    // so we divide by 127 and subtract 1.
+    const trainim = trainImage.toFloat().div(tf.scalar(127)).sub(tf.scalar(1));
+
+    return trainim;
+  }
+
+  function onFileLoad(fileLoadedEvent) 
+  {
+    const textFromFileLoaded = fileLoadedEvent.target.result;              
+    this.csvContent = textFromFileLoaded;  
+  }
+  
+  
+  function onFileSelect(input) 
+  {
+    const files = input.files;
+    
+    if (files && files.length) 
+    {
+      const fileToRead = files[0];
+
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {     
+        const textFromFileLoaded = fileReader.result;              
+        this.csvContent = textFromFileLoaded;   }
+
+      fileReader.readAsText(fileToRead, "UTF-8");
+
+      console.log("Filename: " + files[0].name);
+      console.log("Type: " + files[0].type);
+      console.log("Size: " + files[0].size + " bytes");
+    }
+  }
+
+  function getTotalUninfected() 
+  {
+    return this.tableRows.map(t => t.LabelX1).reduce((acc, value) => acc + value, 0);
+  };
+  
+  
+  function getTotalPAratisized() 
+  {
+    return this.tableRows.map(t => t.LabelX2).reduce((acc, value) => acc + value, 0);
+  };
+
+
   useEffect(() => {
     // initClassifier();
-    getModifiedMobilenet();
-    const img = document.getElementById("my-image");
-
-    // Load the model.
-    window.mobilenet.load().then((model) => {
-      // Classify the image.
-      model.classify(img).then((predictions) => {
-        console.log("Predictions: ");
-        console.log(predictions);
-      });
-    });
+    // getModifiedMobilenet();
+    train();
   }, []);
 
   const predict = async (image) => {
@@ -111,24 +334,24 @@ const ImageModelTrainer = () => {
   };
 
   useEffect(() => {
-    loadImage();
-    // Define the model architecture
-    const model = tf.sequential();
-    model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+    // loadImage();
+    // // Define the model architecture
+    // const model = tf.sequential();
+    // model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
 
-    // Compile the model
-    model.compile({ optimizer: "sgd", loss: "meanSquaredError" });
+    // // Compile the model
+    // model.compile({ optimizer: "sgd", loss: "meanSquaredError" });
 
-    // Generate some training data
-    const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
-    const ys = tf.tensor2d([2, 4, 6, 8], [4, 1]);
+    // // Generate some training data
+    // const xs = tf.tensor2d([1, 2, 3, 4], [4, 1]);
+    // const ys = tf.tensor2d([2, 4, 6, 8], [4, 1]);
 
-    // Train the model
-    model.fit(xs, ys, { epochs: 10 }).then(() => {
-      // Use the model to make predictions
-      const output = model.predict(tf.tensor2d([5], [1, 1]));
-      console.log(output.dataSync()[0]);
-    });
+    // // Train the model
+    // model.fit(xs, ys, { epochs: 10 }).then(() => {
+    //   // Use the model to make predictions
+    //   const output = model.predict(tf.tensor2d([5], [1, 1]));
+    //   console.log(output.dataSync()[0]);
+    // });
   }, []);
 
   const uploadFile = (e) => {
@@ -147,11 +370,30 @@ const ImageModelTrainer = () => {
 
   return (
     <>
-      <img
-        style={{ width: "100px" }}
-        src="/traningImages/apple-1.png"
-        id="my-image"
-      />
+    <div className="row">
+      <div className="col-md-1">
+        {
+          imageList1.map((image, index) => (
+            <img
+              src={`/traningImages/${image}`}
+              id={image}
+              width="224" height="224"
+/>
+          ))
+        }
+      </div>
+      <div className="col-md-1">
+        {
+          imageList2.map((image, index) => (
+            <img
+              src={`/traningImages/${image}`}
+              id={image}
+              className="img-fluid"
+/>
+          ))
+        }
+      </div>
+    </div>
       <div className="d-flex mt-5">
         <div className="row w-100 m-0">
           <div className="col-md-4">
