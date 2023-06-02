@@ -377,7 +377,7 @@ const ImageModelTrainer = () => {
             <img
               src={`/traningImages/${image}`}
               id={image}
-              className="img-fluid"
+              width="224" height="224"
 />
           ))
         }
