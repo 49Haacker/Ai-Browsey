@@ -3,7 +3,7 @@ import * as tf from "@tensorflow/tfjs";
 import "@tensorflow/tfjs";
 // import '@tensorflow/tfjs-node';
 import * as mobilenet from "@tensorflow-models/mobilenet";
-import {categoricalCrossentropy} from '@tensorflow/tfjs-layers/dist/exports_metrics';
+import { categoricalCrossentropy } from '@tensorflow/tfjs-layers/dist/exports_metrics';
 
 const imageList1 = [
   'apple-1.jpg',
@@ -18,8 +18,8 @@ const imageList1 = [
   'orange-5.jpg',
 ]
 
-const label_x1 = [1,1,1,1,1,0,0,0,0,0];
-const label_x2 = [0,0,0,0,0,1,1,1,1,1];
+const label_x1 = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0];
+const label_x2 = [0, 0, 0, 0, 0, 1, 1, 1, 1, 1];
 
 const imageList2 = [
   'orange-1.jpg',
@@ -29,24 +29,23 @@ const imageList2 = [
   'orange-5.jpg',
 ]
 
-const classes  = ['apple','apple','apple','apple','apple','orange','orange','orange','orange','orange'];
+const classes = ['apple', 'apple', 'apple', 'apple', 'apple', 'orange', 'orange', 'orange', 'orange', 'orange'];
 
 const ImageModelTrainer = () => {
 
   const [batchSize, setBatchSize] = useState(5);
 
-  const train =  async () =>
-  { 
-    const {images, targets} = generateData();
+  const train = async () => {
+    const { images, targets } = generateData();
     // this.ProgressBarValue=35;
-    console.log("Images are loaded into the memory as tensor !","Close");
+    console.log("Images are loaded into the memory as tensor !", "Close");
 
     const mobilenetModified = await getModifiedMobilenet();
     // this.ProgressBarValue=50;
-    console.log("Modefiled Mobilenet AI Model is loaded !","Close");
+    console.log("Modefiled Mobilenet AI Model is loaded !", "Close");
 
-    await fineTuneModifiedModel(mobilenetModified,images,targets);
-    console.log("Model training is completed !","Close");
+    await fineTuneModifiedModel(mobilenetModified, images, targets);
+    console.log("Model training is completed !", "Close");
     // this.ProgressBarValue=100;
   }
 
@@ -101,15 +100,11 @@ const ImageModelTrainer = () => {
   };
 
 
-  const freezeModelLayers = (trainableLayers,mobilenetModified) =>
-  {
-    for (const layer of mobilenetModified.layers) 
-    {
+  const freezeModelLayers = (trainableLayers, mobilenetModified) => {
+    for (const layer of mobilenetModified.layers) {
       layer.trainable = false;
-      for (const tobeTrained of trainableLayers) 
-      {
-        if (layer.name.indexOf(tobeTrained) === 0) 
-        {
+      for (const tobeTrained of trainableLayers) {
+        if (layer.name.indexOf(tobeTrained) === 0) {
           layer.trainable = true;
           break;
         }
@@ -118,117 +113,107 @@ const ImageModelTrainer = () => {
     return mobilenetModified;
   }
 
-  const fineTuneModifiedModel =  async (model,images,targets) =>
-  {
-    function onBatchEnd(batch, logs) 
-    {
+  const fineTuneModifiedModel = async (model, images, targets) => {
+    function onBatchEnd(batch, logs) {
       console.log('Accuracy', logs.acc);
       console.log('CrossEntropy', logs.ce);
       console.log('All', logs);
     }
     console.log('Finetuning the model...');
 
-    await model.fit(images, targets, 
-    {
-      epochs: 5,
-      batchSize: 24,
-      validationSplit: 0.2,
-      callbacks: {onBatchEnd}
-   
-    }).then(info => {
-      // console.log
-      console.log('Final accuracy', info.history.acc);
-      console.log('Cross entropy', info.ce);
-      console.log('All', info);
-      console.log('All', info.history['acc'][0]);
-      
-      for ( let k = 0; k < 5; k++) 
-    {
-      console.log({acc: 0, ce: 0 , loss: 0});
+    await model.fit(images, targets,
+      {
+        epochs: 5,
+        batchSize: 24,
+        validationSplit: 0.2,
+        callbacks: { onBatchEnd }
 
-      console.log('acc', info.history['acc'][k]);
-      console.log('ce',info.history['ce'][k]);
-      console.log('loss',info.history['loss'][k]); 
-      // this.traningMetrics.push({acc: 0, ce: 0 , loss: 0});
+      }).then(info => {
+        // console.log
+        console.log('Final accuracy', info.history.acc);
+        console.log('Cross entropy', info.ce);
+        console.log('All', info);
+        console.log('All', info.history['acc'][0]);
 
-      // this.traningMetrics[k].acc=info.history['acc'][k];
-      // this.traningMetrics[k].ce=info.history['ce'][k];
-      // this.traningMetrics[k].loss=info.history['loss'][k]; 
-    }
-      images.dispose();
-      targets.dispose();
-      model.dispose();
-    });;
-  
+        for (let k = 0; k < 5; k++) {
+          console.log({ acc: 0, ce: 0, loss: 0 });
+
+          console.log('acc', info.history['acc'][k]);
+          console.log('ce', info.history['ce'][k]);
+          console.log('loss', info.history['loss'][k]);
+          // this.traningMetrics.push({acc: 0, ce: 0 , loss: 0});
+
+          // this.traningMetrics[k].acc=info.history['acc'][k];
+          // this.traningMetrics[k].ce=info.history['ce'][k];
+          // this.traningMetrics[k].loss=info.history['loss'][k]; 
+        }
+        images.dispose();
+        targets.dispose();
+        model.dispose();
+      });;
+
   }
 
-  function parseImages(batchSize)
-  {
-    if (this.isImagesListed) 
-    {
-      this.isImagesListPerformed=false;
+  function parseImages(batchSize) {
+    if (this.isImagesListed) {
+      this.isImagesListPerformed = false;
       return;
     }
 
     let allTextLines = this.csvContent.split(/\r|\n|\r/);
-    
+
     const csvSeparator = ',';
     const csvSeparator_2 = '.';
-    
-    for ( let i = 0; i < batchSize; i++) 
-    {
+
+    for (let i = 0; i < batchSize; i++) {
       // split content based on comma
       const cols = allTextLines[i].split(csvSeparator);
-      
-      this.tableRows.push({ImageSrc: '', LabelX1: 0 , LabelX2: 0, Class: ''});
 
-      if (cols[0].split(csvSeparator_2)[1]=="png") 
-      {  
-        
-        if (cols[1]=="Uninfected") 
-        { 
+      this.tableRows.push({ ImageSrc: '', LabelX1: 0, LabelX2: 0, Class: '' });
+
+      if (cols[0].split(csvSeparator_2)[1] == "png") {
+
+        if (cols[1] == "Uninfected") {
           this.label_x1.push(Number('1'));
           this.label_x2.push(Number('0'));
 
-          this.tableRows[i].ImageSrc="../assets/"+ cols[0];
-          this.tableRows[i].LabelX1=1;
-          this.tableRows[i].LabelX2=0;
-          this.tableRows[i].Class="Uninfected";
-        } 
+          this.tableRows[i].ImageSrc = "../assets/" + cols[0];
+          this.tableRows[i].LabelX1 = 1;
+          this.tableRows[i].LabelX2 = 0;
+          this.tableRows[i].Class = "Uninfected";
+        }
 
-        if (cols[1]=="Parasitized") 
-        { 
+        if (cols[1] == "Parasitized") {
           this.label_x1.push(Number('0'));
           this.label_x2.push(Number('1'));
-      
-          this.tableRows[i].ImageSrc="../assets/"+ cols[0];
-          this.tableRows[i].LabelX1=0;
-          this.tableRows[i].LabelX2=1;
-          this.tableRows[i].Class="Parasitized";
-        } 
 
-      } 
+          this.tableRows[i].ImageSrc = "../assets/" + cols[0];
+          this.tableRows[i].LabelX1 = 0;
+          this.tableRows[i].LabelX2 = 1;
+          this.tableRows[i].Class = "Parasitized";
+        }
+
+      }
     }
     this.table.renderRows();
     this.dataSource.paginator = this.paginator;
-    
-    this.isImagesListed=true;
-    this.isImagesListPerformed=true;
+
+    this.isImagesListed = true;
+    this.isImagesListPerformed = true;
   }
 
-  function generateData ()
-  {
+  function generateData() {
     const imageTensors = [];
     const targetTensors = [];
 
     // let allTextLines = this.csvContent.split(/\r|\n|\r/);
-    
+
     // const csvSeparator = ',';
     // const csvSeparator_2 = '.';
 
-    for(let i= 0 ; i < batchSize ; i++){
+    for (let i = 0; i < batchSize; i++) {
       const imageTensor = capture(imageList1[i]);
-      let targetTensor =tf.tensor1d([label_x1[i],label_x2[i]]);
+      let targetTensor = tf.tensor1d([label_x1[i], label_x2[i]]);
 
       targetTensor.print();
       imageTensors.push(imageTensor);
@@ -240,8 +225,8 @@ const ImageModelTrainer = () => {
     const images = tf.stack(imageTensors);
     const targets = tf.stack(targetTensors);
 
-    return {images, targets};
-    
+    return { images, targets };
+
     // for ( let i = 0; i < batchSize; i++) 
     // {
     //   // split content based on comma
@@ -257,7 +242,7 @@ const ImageModelTrainer = () => {
     //     targetTensor.print();
     //     imageTensors.push(imageTensor);
     //     targetTensors.push(targetTensor);
-  
+
     //     imageTensor.print(true);
     //   } 
     // }
@@ -267,8 +252,7 @@ const ImageModelTrainer = () => {
     // return {images, targets};
   }
 
-  function capture(imgId) 
-  {
+  function capture(imgId) {
     // Reads the image as a Tensor from the <image> element.
     const picture = document.getElementById(imgId);
     const trainImage = tf.browser.fromPixels(picture);
@@ -280,25 +264,23 @@ const ImageModelTrainer = () => {
     return trainim;
   }
 
-  function onFileLoad(fileLoadedEvent) 
-  {
-    const textFromFileLoaded = fileLoadedEvent.target.result;              
-    this.csvContent = textFromFileLoaded;  
+  function onFileLoad(fileLoadedEvent) {
+    const textFromFileLoaded = fileLoadedEvent.target.result;
+    this.csvContent = textFromFileLoaded;
   }
-  
-  
-  function onFileSelect(input) 
-  {
+
+
+  function onFileSelect(input) {
     const files = input.files;
-    
-    if (files && files.length) 
-    {
+
+    if (files && files.length) {
       const fileToRead = files[0];
 
       const fileReader = new FileReader();
-      fileReader.onload = (event) => {     
-        const textFromFileLoaded = fileReader.result;              
-        this.csvContent = textFromFileLoaded;   }
+      fileReader.onload = (event) => {
+        const textFromFileLoaded = fileReader.result;
+        this.csvContent = textFromFileLoaded;
+      }
 
       fileReader.readAsText(fileToRead, "UTF-8");
 
@@ -308,14 +290,12 @@ const ImageModelTrainer = () => {
     }
   }
 
-  function getTotalUninfected() 
-  {
+  function getTotalUninfected() {
     return this.tableRows.map(t => t.LabelX1).reduce((acc, value) => acc + value, 0);
   };
-  
-  
-  function getTotalPAratisized() 
-  {
+
+
+  function getTotalPAratisized() {
     return this.tableRows.map(t => t.LabelX2).reduce((acc, value) => acc + value, 0);
   };
 
@@ -370,30 +350,30 @@ const ImageModelTrainer = () => {
 
   return (
     <>
-    <div className="row">
-      <div className="col-md-1">
-        {
-          imageList1.map((image, index) => (
-            <img
-              src={`/traningImages/${image}`}
-              id={image}
-              width="224" height="224"
-/>
-          ))
-        }
+      <div className="row">
+        <div className="col-md-1">
+          {
+            imageList1.map((image, index) => (
+              <img
+                src={`/traningImages/${image}`}
+                id={image}
+                width="224" height="224"
+              />
+            ))
+          }
+        </div>
+        <div className="col-md-1">
+          {
+            imageList2.map((image, index) => (
+              <img
+                src={`/traningImages/${image}`}
+                id={image}
+                className="img-fluid"
+              />
+            ))
+          }
+        </div>
       </div>
-      <div className="col-md-1">
-        {
-          imageList2.map((image, index) => (
-            <img
-              src={`/traningImages/${image}`}
-              id={image}
-              className="img-fluid"
-/>
-          ))
-        }
-      </div>
-    </div>
       <div className="d-flex mt-5">
         <div className="row w-100 m-0">
           <div className="col-md-4">
