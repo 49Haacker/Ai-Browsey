@@ -12,7 +12,7 @@ const NavBar = () => {
                 <span className="navbar-toggler-icon"></span>
             </button> */}
         <button
-          class="navbar-toggler d-flex justify-content-center align-items-center"
+          className="navbar-toggler d-flex justify-content-center align-items-center"
           type="button"
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasWithBothOptions"
@@ -20,14 +20,18 @@ const NavBar = () => {
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
-          <Link className="navbar-brand text-white navLinkFontSize resBtnNavbarMrgin" style={{ margin: '0px 74px' }}>AI Browsey
+          <Link
+            className="navbar-brand text-white navLinkFontSize resBtnNavbarMrgin"
+            style={{ margin: "0px 74px" }}
+          >
+            AI Browsey
           </Link>
         </button>
 
         <div
-          class="offcanvas offcanvas-start"
+          className="offcanvas offcanvas-start"
           data-bs-scroll="true"
-          tabindex="-1"
+          tabIndex="-1"
           id="offcanvasWithBothOptions"
           aria-labelledby="offcanvasWithBothOptionsLabel"
           style={{
@@ -35,18 +39,21 @@ const NavBar = () => {
               "linear-gradient(90deg, rgb(28 80 42) 0%, rgb(1 1 72) 22%, rgb(140 51 178) 91%)",
           }}
         >
-          <div class="offcanvas-header">
-            <h5 class="offcanvas-title navLinkFontSize" id="offcanvasWithBothOptionsLabel">
+          <div className="offcanvas-header">
+            <h5
+              className="offcanvas-title navLinkFontSize"
+              id="offcanvasWithBothOptionsLabel"
+            >
               AI Browsey
             </h5>
             <button
               type="button"
-              class="btn-close text-reset"
+              className="btn-close text-reset"
               data-bs-dismiss="offcanvas"
               aria-label="Close"
             ></button>
           </div>
-          <div class="offcanvas-body navAllLinkFontSize">
+          <div className="offcanvas-body navAllLinkFontSize">
             <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
               <li className="nav-item">
                 <Link

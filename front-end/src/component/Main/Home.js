@@ -90,30 +90,196 @@ const Home = () => {
 
       <div div className="container mt-secon-div d-flex flex-column">
         <h1 className="text-center" id="posterImage">
-          What is Teachable Machine?
+          What is AI Browsey?
         </h1>
-        <div class="embed-responsive embed-responsive-21by9 d-flex justify-content-center mt-5 height-main-video">
+        <div className="embed-responsive embed-responsive-21by9 d-flex justify-content-center mt-5 height-main-video">
           <iframe
             id="mainVideo"
-            class="embed-responsive-item"
+            className="embed-responsive-item"
             width="100%"
             height="auto"
             src="https://www.youtube-nocookie.com/embed/T2qQGqZxkD0?start=1"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
+            allowFullScreen
           ></iframe>
         </div>
-        <p className="mt-5 fw-bolder text-center">
-          Teachable Machine is a web-based tool that makes creating machine
-          learning models fast, easy, and accessible to everyone. (Note: you can
-          find the{" "}
-          <Link to="https://teachablemachine.withgoogle.com/v1">
-            {" "}
-            first version of Teachable Machine from 2017 here.)
-          </Link>
+        <div className="rwo d-flex justify-content-center align-items-center w-50 m-auto">
+          <p className="mt-5 fw-bolder text-center">
+            AI Browsey is a web-based tool that makes creating machine
+            learning models fast, easy, and accessible to everyone. (Note: you
+            can find the{" "}
+            <Link to="https://teachablemachine.withgoogle.com/v1">
+              {" "}
+              first version of Teachable Machine from 2017 here.)
+            </Link>
+          </p>
+        </div>
+      </div>
+
+      <div
+        className="container d-flex justify-content-center align-items-center flex-column"
+        style={{ marginTop: "17rem" }}
+      >
+        <h1>How do I use it?</h1>
+        <div class="row row-cols-3 g-3 mt-5 w-75">
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/collect.svg"
+                class="card-img-top"
+                alt="Hollywood Sign on The Hill"
+              />
+              <div class="card-body">
+                <h1 class="card-title">Gather</h1>
+                <p class="card-text">
+                  Gather and group your examples into classes, or categories,
+                  that you want the computer to learn.
+                </p>
+                <Link to="">
+                  Video: Gather samples
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-play-circle"
+                    viewBox="0 0 16 16"
+                    style={{ margin: "0 13px" }}
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/train.svg"
+                class="card-img-top"
+                alt="Palm Springs Road"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a longer card with supporting text below as a natural
+                  lead-in to additional content. This content is a little bit
+                  longer.
+                </p>
+                <Link to="">
+                  Video: Train your model
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-play-circle"
+                    viewBox="0 0 16 16"
+                    style={{ margin: "0 13px" }}
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card align-items-end h-100">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/export.svg"
+                class="card-img-top"
+                alt="Los Angeles Skyscrapers"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">
+                  This is a longer card with supporting text below as a natural
+                  lead-in to additional content.
+                </p>
+                <Link to="">
+                  Video: Export your model
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-play-circle"
+                    viewBox="0 0 16 16"
+                    style={{ margin: "0 13px" }}
+                  >
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                    <path d="M6.271 5.055a.5.5 0 0 1 .52.038l3.5 2.5a.5.5 0 0 1 0 .814l-3.5 2.5A.5.5 0 0 1 6 10.5v-5a.5.5 0 0 1 .271-.445z" />
+                  </svg>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="container-lg d-flex justify-content-center align-items-center flex-column"
+        style={{ marginTop: "17rem" }}
+      >
+        <h1>What can I use to teach it?</h1>
+        <p className="mt-5 fw-bolder text-center w-50">
+          Teachable Machine is flexible – use files or capture examples live.
+          It’s respectful of the way you work. You can even choose to use it
+          entirely on-device, without any webcam or microphone data leaving your
+          computer.
         </p>
+        <div class="row row-cols-3 g-3 mt-5 w-75">
+          <div class="col">
+            <div class="card">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-images.png"
+                class="card-img-top"
+                alt="Hollywood Sign on The Hill"
+              />
+              <div class="card-body">
+                <h1 class="card-title">Images</h1>
+                <p class="card-text">
+                  Teach a model to classify images using files or your webcam.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card h-100">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-sounds.png"
+                class="card-img-top"
+                alt="Palm Springs Road"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Sounds</h5>
+                <p class="card-text">
+                  Teach a model to classify audio by recording short sound
+                  samples.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card align-items-end">
+              <img
+                src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-poses.png"
+                class="card-img-top"
+                alt="Los Angeles Skyscrapers"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Poses</h5>
+                <p class="card-text">
+                  Teach a model to classify body positions using files or
+                  striking poses in your webcam.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       
     </>
