@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <>
+    <div className="bColor">
       <div className="container d-flex mt-3 w-75 flexRevrse">
         <div className="resHomePadding" style={{ padding: "0 113px" }}>
           <h1
@@ -220,6 +220,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      
       <div
         className="container-lg d-flex justify-content-center align-items-center flex-column"
         style={{ marginTop: "17rem" }}
@@ -233,7 +234,7 @@ const Home = () => {
         </p>
         <div class="row row-cols-3 g-3 mt-5 w-75">
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <img
                 src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-images.png"
                 class="card-img-top"
@@ -264,7 +265,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card align-items-end">
+            <div class="card align-items-end h-100">
               <img
                 src="https://teachablemachine.withgoogle.com/assets/img/contentpage/home/teach-poses.png"
                 class="card-img-top"
@@ -289,7 +290,7 @@ const Home = () => {
         <h1>Tutorials</h1>
         <div class="row row-cols-3 g-3 mt-5 w-100">
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://medium.com/@warronbebster/teachable-machine-tutorial-bananameter-4bfffa765866">Images: Bananameter</a></h1>
                 <p class="card-text">
@@ -299,7 +300,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://medium.com/@warronbebster/teachable-machine-tutorial-bananameter-4bfffa765866">Images: Bananameter</a></h1>
                 <p class="card-text">
@@ -309,7 +310,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://medium.com/@warronbebster/teachable-machine-tutorial-bananameter-4bfffa765866">Images: Bananameter</a></h1>
                 <p class="card-text">
@@ -328,9 +329,9 @@ const Home = () => {
         <h1>For Learning</h1>
         <p>Want to learn using Teachable Machine?
           Here are some lessons & activities folks have made with it:</p>
-        <div class="row row-cols-3 g-3 mt-5 w-75">
+        <div class="row row-cols-3 g-3 mt-5 w-85">
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://docs.google.com/document/d/1e9wx9oBg7CR0s5O7YnYHVmX7H7pnITfoDxNdrSGkp60/view">AI + Ethics</a>
                   <a className="m-3" href=""><i class="far fa-file-alt"></i></a>
@@ -346,7 +347,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://dancingwithai.media.mit.edu/">Dancing with AI</a>
                   <a className="m-3" href=""><i class="far fa-file-alt"></i></a>
@@ -362,7 +363,7 @@ const Home = () => {
             </div>
           </div>
           <div class="col">
-            <div class="card">
+            <div class="card h-100">
               <div class="card-body">
                 <h1 class="card-title"><a href="https://edu.readyai.org/courses/teachable-machine/">Ready AI Lesson</a>
                   <a className="m-3" href=""><i class="far fa-file-alt"></i></a>
@@ -380,7 +381,7 @@ const Home = () => {
 
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

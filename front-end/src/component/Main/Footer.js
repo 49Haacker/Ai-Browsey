@@ -48,7 +48,7 @@ const Footer = () => {
           </div>
           <div className="text-center p-3" style={{ backgroundColor: 'rgb(0 0 0 / 46%)' }}>
             © 2020 Copyright:
-            <a className="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+            <a className="text-white" href="https://mdbootstrap.com/">AIBrowsey.com</a>
           </div>
 
         </footer>
