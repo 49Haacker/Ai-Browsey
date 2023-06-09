@@ -1,9 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import * as posenet from '@tensorflow-models/posenet';
+import '@tensorflow/tfjs';
+import PoseNet from "react-posenet"
 
 const PoseModelTrainer = () => {
+
+  const videoRef = useRef(null);
+
+  
+  useEffect(() => {
+    const runPoseNet = async () => {
+      const net = await posenet.load();
+      const video = videoRef.current;
+
+      const poseDetectionFrame = async () => {
+        // Ensure the video metadata has been loaded (e.g., dimensions).
+        if (
+          typeof video !== 'undefined' &&
+          video.readyState === 4
+        ) {
+          // Resize the video to the model's expected size.
+          const { videoWidth, videoHeight } = video;
+          video.width = videoWidth;
+          video.height = videoHeight;
+
+          // Estimate poses from the video element.
+          const poses = await net.estimatePoses(video, {
+            flipHorizontal: false,
+          });
+
+          // Use the poses as needed (e.g., draw them on a canvas).
+          console.log(poses);
+        }
+
+        requestAnimationFrame(poseDetectionFrame);
+      };
+
+      poseDetectionFrame();
+    };
+
+    runPoseNet();
+  }, []);
+
   return (
     <>
       <div className="d-flex mt-5">
+        <div>
+
+        <video ref={videoRef} autoPlay />
+        </div>
         <div className="row w-100 m-0">
           <div className="col-md-4">
             <div

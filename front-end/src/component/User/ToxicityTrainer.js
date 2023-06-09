@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const ToxicityTrainer = () => {
+
+  const [inputText, setInputText] = useState('');
 
     const getToxicity = (text, cb) => {
         const threshold = 0.9;
@@ -21,8 +23,27 @@ const ToxicityTrainer = () => {
         });
       };
 
+      const analyzeText = async () => {
+        await getToxicity(inputText, (result) => {
+          console.log(result);
+        });
+      }
+
   return (
-    <div>ToxicityTrainer</div>
+    <div>
+      <header>
+        <div className='container'>
+          <h1>Toxicity Model Trainer</h1>
+        </div>
+      </header>
+      <div>
+        <textarea onChange={e => setInputText(e.target.value)} value={inputText}>
+
+        </textarea>
+
+        <button className='btn btn-primary' onClick={analyzeText}>Check</button>
+      </div>
+    </div>
   )
 }
 

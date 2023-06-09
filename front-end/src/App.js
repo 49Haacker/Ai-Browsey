@@ -14,6 +14,8 @@ import PoseTrainer from "./component/User/PoseTrainer";
 import ModelBrowser from "./component/Main/ModelBrowser";
 import PoseModelTrainer from "./component/User/PoseModelTrainer";
 import AdminDashbord from "./component/Admin/AdminDashbord";
+import ToxicityTrainer from "./component/User/ToxicityTrainer";
+import Contact from "./component/Main/Contact";
 
 function App() {
   return (
@@ -26,10 +28,11 @@ function App() {
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
             <Route path="browser" element={<ModelBrowser />} />
+            <Route path="contact" element={<Contact />} />
           </Route>
 
           <Route path="admin" element={<Admin />}>
-            <Route path="admin"  element={<Navigate to="/admin/admindashboard" />} />
+            <Route path="admin" element={<Navigate to="/admin/admindashboard" />} />
             <Route path="adminDashbord" element={<AdminDashbord />} />
             <Route path="adminProfile" element={<AdminProfile />} />
           </Route>
@@ -38,6 +41,7 @@ function App() {
             <Route path="imageModelTrainer" element={<ImageModelTrainer />} />
             <Route path="poseModelTrainer" element={<PoseModelTrainer />} />
             <Route path="PoseTrainer" element={<PoseTrainer />} />
+            <Route path="ToxicityTrainer" element={<ToxicityTrainer />} />
           </Route>
         </Routes>
       </BrowserRouter>

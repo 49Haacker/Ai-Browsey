@@ -1,6 +1,7 @@
 import React from 'react';
 import './login.css';
 import {useFormik} from 'formik';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 
@@ -67,9 +68,9 @@ const Login = () => {
                       Remember me
                     </label>
                   </div>
-                  <a href="#!" className="text-body">
+                  <Link to="#!" className="text-body">
                     Forgot password?
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="text-center text-lg-start mt-4 pt-2">
@@ -78,9 +79,9 @@ const Login = () => {
                   </button>
                   <p className="small fw-bold mt-2 pt-1 mb-0">
                     Don't have an account?{' '}
-                    <a href="#!" className="link-danger">
+                    <Link to="/main/signup" className="link-danger">
                       Register
-                    </a>
+                    </Link>
                   </p>
                 </div>
               </form>

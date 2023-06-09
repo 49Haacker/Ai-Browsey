@@ -34,7 +34,7 @@ const ModelBrowser = () => {
               </div>
             </div>
           </Link>
-          <Link to="" className="text-decoration-none text-black">
+          <Link to="/user/ToxicityTrainer/" className="text-decoration-none text-black">
             <div
               className="card"
               style={{ width: "27rem", margin: "0px 33px 0 0" }}
@@ -45,14 +45,14 @@ const ModelBrowser = () => {
                 alt="..."
               />
               <div className="card-body">
-                <h2>Audio Project</h2>
+                <h2>Toxicity</h2>
                 <p className="card-text">
                   Teach based on images, from files or your webcam.
                 </p>
               </div>
             </div>
           </Link>
-          <Link to="" className="text-decoration-none text-black">
+          <Link to="/user/PoseModelTrainer/" className="text-decoration-none text-black">
             <div
               className="card"
               style={{ width: "27rem", margin: "0px 33px 0 0" }}
