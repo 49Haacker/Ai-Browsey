@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import * as posenet from '@tensorflow-models/posenet';
 import '@tensorflow/tfjs';
-import PoseNet from "react-posenet"
 
 const PoseModelTrainer = () => {
 
