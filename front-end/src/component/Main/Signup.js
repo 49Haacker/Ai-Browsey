@@ -2,7 +2,7 @@ import React from 'react';
 import './Signup.css'
 
 const Signup = () => {
-    
+
     return (
         <>
             {/* Section: Design Block */}
@@ -24,7 +24,7 @@ const Signup = () => {
                                     backdropFilter: "blur(30px)"
                                 }}
                             >
-                                <div className="card-body p-5 shadow-5 text-center">
+                                <div className="card-body p-5 shadow-5 text-center" style={{ height: '50rem' }}>
                                     <h2 className="fw-bold mb-5">Sign up now</h2>
                                     <form>
                                         {/* 2 column grid layout with text inputs for the first and last names */}
