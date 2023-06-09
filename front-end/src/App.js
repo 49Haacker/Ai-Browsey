@@ -7,13 +7,13 @@ import Home from "./component/Main/Home";
 import Login from "./component/Main/Login";
 import Signup from "./component/Main/Signup";
 import Admin from "./component/Admin";
-import AdminDashbord from "./component/Admin/AdminDashbord";
 import AdminProfile from "./component/Admin/AdminProfile";
 import User from "./component/User";
 import ImageModelTrainer from "./component/User/ImageModelTrainer";
 import PoseTrainer from "./component/User/PoseTrainer";
 import ModelBrowser from "./component/Main/ModelBrowser";
 import PoseModelTrainer from "./component/User/PoseModelTrainer";
+import AdminDashbord from "./component/Admin/AdminDashbord";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
           </Route>
 
           <Route path="admin" element={<Admin />}>
-            <Route path="/admin" element={<Navigate to  ="/admin/adminDashboard" />} />
+            <Route path="admin"  element={<Navigate to="/admin/admindashboard" />} />
             <Route path="adminDashbord" element={<AdminDashbord />} />
             <Route path="adminProfile" element={<AdminProfile />} />
           </Route>
