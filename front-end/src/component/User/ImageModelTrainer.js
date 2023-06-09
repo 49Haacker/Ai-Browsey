@@ -28,13 +28,19 @@ const ImageModelTrainer = () => {
           const reader = new FileReader();
       
           reader.onload = (e) => {
+            const blob = new Blob([reader.result]);
+
+    // Use the blob object as needed
+    // For example, you can upload it to a server or perform other operations
+
+    console.log(blob);
             const imageDataUrl = e.target.result;
             setSelImages([...selImages, imageDataUrl]);
             console.log(imageDataUrl);
             // Do something with the image data URL (e.g., display it, process it, etc.)
           };
       
-          reader.readAsDataURL(file);
+          reader.readAsArrayBuffer(file);
         }
       }
     
