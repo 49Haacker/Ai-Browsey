@@ -119,6 +119,7 @@ const ImageModelTrainer = () => {
     }
     console.log('Finetuning the model...');
 
+    
     await model
       .fit(images, targets, {
         epochs: 5,
