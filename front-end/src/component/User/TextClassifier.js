@@ -243,10 +243,10 @@ const TextClassifier = () => {
             <p className="display-4 text-center fw-bold">Text Classifier</p>
             <hr />
 
-            <div className='row my-3'>
-              <div className='col-md-4'>
+            <div className="row my-3">
+              <div className="col-md-4">
                 <label>Selected Epochs</label>
-                <input type='number' className='form-control' value={selEpoch} onChange={e => setSelEpoch(parseInt(e.target.value))} />
+                <input type="number" className="form-control" value={selEpoch} onChange={(e) => setSelEpoch(parseInt(e.target.value))} />
               </div>
             </div>
 
@@ -304,7 +304,7 @@ const TextClassifier = () => {
             <button className="btn btn-primary btn-lg w-100 my-4" onClick={trainModel} disabled={classes.length < 2}>
               <i class="fas fa-rocket    "></i> Train Model
             </button>
-            <h3 className='text-success text-center'>{modelTrained && 'Model has been Trained Successfully!!'}</h3>
+            <h3 className="text-success text-center">{modelTrained && 'Model has been Trained Successfully!!'}</h3>
             <label className="mt-3 h2">Test Model</label>
             <input className="form-control" onChange={(e) => setTestText(e.target.value)} placeholder="Enter Text to Classify" />
             <button className="btn btn-primary mt-4" onClick={testModel} disabled={classes.length < 2}>
@@ -312,7 +312,7 @@ const TextClassifier = () => {
             </button>
             <h1 className="my-4">Result</h1>
             <hr />
-                {/* {predictionResult} */}
+            {/* {predictionResult} */}
             {predictionResult &&
               predictionResult.map((res, index) => (
                 <div className="row">
