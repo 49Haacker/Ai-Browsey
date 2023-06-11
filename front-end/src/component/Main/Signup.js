@@ -46,7 +46,7 @@ const Signup = () => {
   });
 
   return (
-    <section className="vh-100" style={{backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: `url('https://wallpapercave.com/wp/wp6621664.jpg')`}}>
+    <section className="h-100" style={{backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: `url('https://wallpapercave.com/wp/wp6621664.jpg')`}}>
       <div>
 
       <div className="container h-100 pt-5">
@@ -61,7 +61,7 @@ const Signup = () => {
                       Sign up
                     </p>
                     <form
-                      className="mx-1 mx-md-4 p-2  " style={{backgroundColor:'white',width:"55vh" }}
+                      className="mx-1 mx-md-4 p-2  " style={{backgroundColor:'white',width:"100%" }}
                       onSubmit={signupform.handleSubmit}
                     >
                       <div className="d-flex flex-row align-items-center mb-4">
