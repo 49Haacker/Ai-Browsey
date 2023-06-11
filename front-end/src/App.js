@@ -45,7 +45,7 @@ function App() {
             <Route path="poseModelTrainer" element={<PoseModelTrainer />} />
             <Route path="PoseTrainer" element={<PoseTrainer />} />
             <Route path="ToxicityTrainer" element={<ToxicityTrainer />} />
-            <Route path="text" element={<TextClassifier />} />
+            <Route path="TextModelTrainer" element={<TextClassifier />} />
             <Route path="AudioTrainer" element={<AudioModelTrainer />} />
             <Route path="teachableposenet" element={<TeachablePoseNet />} />
           </Route>
