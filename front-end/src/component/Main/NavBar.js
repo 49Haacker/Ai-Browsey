@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Logo from '../Logo';
 
 const NavBar = () => {
   return (
@@ -9,9 +10,9 @@ const NavBar = () => {
         {/* Container wrapper */}
         <div className="container">
           {/* Navbar brand */}
-          <a className="navbar-brand me-2" href="https://mdbgo.com/">
-            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height={16} alt="MDB Logo" loading="lazy" style={{ marginTop: '-1px' }} />
-          </a>
+          <NavLink className="navbar-brand me-2" to="/main/home">
+            <Logo title={'AI Browsy'} />
+          </NavLink>
           {/* Toggle button */}
           <button
             className="navbar-toggler"
@@ -29,9 +30,9 @@ const NavBar = () => {
             {/* Left links */}
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Dashboard
-                </a>
+                <NavLink className="nav-link" to="/main/browse">
+                  Browse AI Models
+                </NavLink>
               </li>
             </ul>
             {/* Left links */}
