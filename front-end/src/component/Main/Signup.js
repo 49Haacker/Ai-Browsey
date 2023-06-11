@@ -26,7 +26,7 @@ const Signup = () => {
         },
       });
       console.log(res.status);
-      if (res.status === 201) {
+      if (res.status === 200) {
         Swal.fire({
           icon: "success",
           title: "Success",
@@ -34,7 +34,7 @@ const Signup = () => {
         });
         const data = (await res.json()).result;
         // sessionStorage.setItem("user", JSON.stringify(data));
-        navigate("/main/signin");
+        navigate("/main/login");
       } else {
         Swal.fire({
           icon: "error",

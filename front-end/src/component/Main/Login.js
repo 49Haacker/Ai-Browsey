@@ -1,19 +1,60 @@
 import React from 'react';
 import './login.css';
 import {useFormik} from 'formik';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import app_config from '../../config';
+import { useUserContext } from '../Context/UserProvider';
 
 const Login = () => {
+
+  const url = app_config.apiUrl;
+  const navigate = useNavigate();
+  const { themeColor, themeColorLight, title } = app_config;
+  const {setLoggedIn} = useUserContext();
 
   const loginForm = useFormik({
     initialValues: {
       email: '',
       password: ''
     },
-    onSubmit: (value) => {
-      console.log(value);
+    onSubmit: async (values) => {
+      console.log(values);
+      const res = await fetch(`${url}/user/auth`, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.status);
+      if (res.status === 200) {
+        const data = (await res.json()).result;
+        // console.log("Login Successful");
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Login Successful!!",
+        });
+        setLoggedIn(true);
+        if (data.role === "admin") {
+          sessionStorage.setItem("admin", JSON.stringify(data));
+          navigate("/admin/dashboard");
+        } else {
+          sessionStorage.setItem("user", JSON.stringify(data));
+          navigate("/user/profile");
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Login Failed!!",
+        });
+      }
     }
   });
+
+
 
   return (
     <>
