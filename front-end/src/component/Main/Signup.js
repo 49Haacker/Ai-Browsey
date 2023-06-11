@@ -1,148 +1,192 @@
-import React from 'react';
-import './Signup.css'
+import React from "react";
+import app_config from "../../config";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { useFormik } from "formik";
 
 const Signup = () => {
+  const url = app_config.apiUrl;
+  const { themeColor, themeColorLight } = app_config;
+  const navigate = useNavigate();
 
-    return (
-        <>
-            {/* Section: Design Block */}
-            <section className="text-center text-lg-start">
-                <style
-                    dangerouslySetInnerHTML={{
-                        __html:
-                            "\n    .cascading-right {\n      margin-right: -50px;\n    }\n\n    @media (max-width: 991.98px) {\n      .cascading-right {\n        margin-right: 0;\n      }\n    }\n  "
-                    }}
-                />
-                {/* Jumbotron */}
-                <div className="container py-4">
-                    <div className="row g-0 align-items-center">
-                        <div className="col-lg-6 mb-5 mb-lg-0">
-                            <div
-                                className="card cascading-right"
-                                style={{
-                                    background: "hsla(0, 0%, 100%, 0.55)",
-                                    backdropFilter: "blur(30px)"
-                                }}
-                            >
-                                <div className="card-body p-5 shadow-5 text-center" style={{ height: '50rem' }}>
-                                    <h2 className="fw-bold mb-5">Sign up now</h2>
-                                    <form>
-                                        {/* 2 column grid layout with text inputs for the first and last names */}
-                                        <div className="row">
-                                            <div className="col-md-6 mb-4">
-                                                <div className="form-outline">
-                                                    <input
-                                                        type="text"
-                                                        id="form3Example1"
-                                                        className="form-control"
-                                                    />
-                                                    <label className="form-label" htmlFor="form3Example1">
-                                                        First name
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div className="col-md-6 mb-4">
-                                                <div className="form-outline">
-                                                    <input
-                                                        type="text"
-                                                        id="form3Example2"
-                                                        className="form-control"
-                                                    />
-                                                    <label className="form-label" htmlFor="form3Example2">
-                                                        Last name
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {/* Email input */}
-                                        <div className="form-outline mb-4">
-                                            <input
-                                                type="email"
-                                                id="form3Example3"
-                                                className="form-control"
-                                            />
-                                            <label className="form-label" htmlFor="form3Example3">
-                                                Email address
-                                            </label>
-                                        </div>
-                                        {/* Password input */}
-                                        <div className="form-outline mb-4">
-                                            <input
-                                                type="password"
-                                                id="form3Example4"
-                                                className="form-control"
-                                            />
-                                            <label className="form-label" htmlFor="form3Example4">
-                                                Password
-                                            </label>
-                                        </div>
-                                        {/* Checkbox */}
-                                        <div className="form-check d-flex justify-content-center mb-4">
-                                            <input
-                                                className="form-check-input me-2"
-                                                type="checkbox"
-                                                defaultValue=""
-                                                id="form2Example33"
-                                                defaultChecked=""
-                                            />
-                                            <label className="form-check-label" htmlFor="form2Example33">
-                                                Subscribe to our newsletter
-                                            </label>
-                                        </div>
-                                        {/* Submit button */}
-                                        <button
-                                            type="submit"
-                                            className="btn btn-primary btn-block mb-4"
-                                        >
-                                            Sign up
-                                        </button>
-                                        {/* Register buttons */}
-                                        <div className="text-center">
-                                            <p>or sign up with:</p>
-                                            <button
-                                                type="button"
-                                                className="btn btn-link btn-floating mx-1"
-                                            >
-                                                <i className="fab fa-facebook-f" />
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-link btn-floating mx-1"
-                                            >
-                                                <i className="fab fa-google" />
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-link btn-floating mx-1"
-                                            >
-                                                <i className="fab fa-twitter" />
-                                            </button>
-                                            <button
-                                                type="button"
-                                                className="btn btn-link btn-floating mx-1"
-                                            >
-                                                <i className="fab fa-github" />
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+  const signupform = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      cPassword: "",
+    },
+    onSubmit: async (values) => {
+      console.log(values);
+      const res = await fetch(`${url}/user/add`, {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.status);
+      if (res.status === 201) {
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "User Registered Successfully!!",
+        });
+        const data = (await res.json()).result;
+        // sessionStorage.setItem("user", JSON.stringify(data));
+        navigate("/main/signin");
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Some Error Occured!!",
+        });
+      }
+    },
+  });
+
+  return (
+    <section className="vh-100" style={{backgroundPosition: 'center', backgroundSize: 'cover', backgroundImage: `url('https://wallpapercave.com/wp/wp6621664.jpg')`}}>
+      <div>
+
+      <div className="container h-100 pt-5">
+        {/* <div className="row "> */}
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col-lg-12 col-xl-11">
+            <div className="card text-black shadow-0 pb-4" style={{ borderRadius: 25 }}>
+              <div className="card-body  p-md-5">
+                <div  className="row justify-content-center ">
+                  <div className="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1"style={{backgroundColor:'white'}}>
+                    <p className="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
+                      Sign up
+                    </p>
+                    <form
+                      className="mx-1 mx-md-4 p-2  " style={{backgroundColor:'white',width:"55vh" }}
+                      onSubmit={signupform.handleSubmit}
+                    >
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-user fa-lg me-3 fa-fw" />
+                        <div className=" flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example1c"
+                          >
+                            {/* Your Name */}
+                          </label>
+                          <input
+                            type="text"
+                            id="name"
+                            onChange={signupform.handleChange}
+                            value={signupform.values.name}
+                            className="form-control" 
+                            placeholder="Your Name"
+                          />
                         </div>
-                        <div className="col-lg-6 mb-5 mb-lg-0">
-                            <img
-                                src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg"
-                                className="hight-img w-100 rounded-4 shadow-4"
-                                alt="contact-iamge"
-                            />
+                      </div>
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-envelope fa-lg me-3 fa-fw" />
+                        <div className="flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example3c"
+                          >
+                            {/* Your Email */}
+                          </label>
+                          <input
+                            type="email"
+                            id="email"
+                            onChange={signupform.handleChange}
+                            value={signupform.values.email}
+                            className="form-control"
+                            placeholder="Your Email"
+                          />
                         </div>
-                    </div>
+                      </div>
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-lock fa-lg me-3 fa-fw" />
+                        <div className="flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example4c"
+                          >
+                            {/* Password */}
+                          </label>
+                          <input
+                            type="password"
+                            id="password"
+                            onChange={signupform.handleChange}
+                            value={signupform.values.password}
+                            className="form-control"
+                            placeholder="Password"
+                          />
+                        </div>
+                      </div>
+                      <div className="d-flex flex-row align-items-center mb-4">
+                        <i className="fas fa-key fa-lg me-3 fa-fw" />
+                        <div className="flex-fill mb-0">
+                          <label
+                            className="form-label"
+                            htmlFor="form3Example4cd"
+                          >
+                            {/* Repeat your password */}
+                          </label>
+                          <input
+                            type="password"
+                            id="cPassword"
+                            onChange={signupform.handleChange}
+                            value={signupform.values.cPassword}
+                            className="form-control"
+                            placeholder="Repeat Your Password"
+                          />
+                        </div>
+                      </div>
+                      <div className="form-check d-flex justify-content-center mb-3">
+                        <input
+                          className="form-check-input me-2"
+                          type="checkbox"
+                          defaultValue=""
+                          id="form2Example3c"
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="form2Example3"
+                        >
+                          I agree all statements in{" "}
+                          <a href="#! " >Terms of service</a>
+                        </label>
+                      </div>
+                      <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                        <button
+                          type="submit"
+                          className="btn btn-primary btn-lg"
+                        >
+                          Register
+                        </button>
+                      </div>
+                      <p className="ms-4 small fw-bold mt-2 pt-1 mb-0 text-center">Already a user?{" "}
+                      <Link to='/main/signin'>SignIn</Link></p>
+                    </form>
+                  </div>
+                  <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+                    
+                    <img 
+                      src="https://www.inventateq.com/assets/python/artificial_int.jpg"
+                      className="img-fluid rounded "
+                      alt="Sample image"
+                    />
+                  </div>
                 </div>
-                {/* Jumbotron */}
-            </section>
-            {/* Section: Design Block */}
-        </>
+              </div>
+            </div>
+            <div>
+              
+          </div>
+        </div>
+      </div>        
+      </div>
+      </div>
+    </section>
+  );
+};
 
-    )
-}
-
-export default Signup
+export default Signup;

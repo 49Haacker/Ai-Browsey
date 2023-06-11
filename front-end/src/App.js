@@ -16,6 +16,9 @@ import PoseModelTrainer from "./component/User/PoseModelTrainer";
 import AdminDashbord from "./component/Admin/AdminDashbord";
 import ToxicityTrainer from "./component/User/ToxicityTrainer";
 import Contact from "./component/Main/Contact";
+import AudioModelTrainer from "./component/User/AudioModelTrainer";
+import TeachablePoseNet from "./component/User/TeachablePosenet";
+import TextClassifier from "./component/User/TextClassifier";
 
 function App() {
   return (
@@ -42,6 +45,9 @@ function App() {
             <Route path="poseModelTrainer" element={<PoseModelTrainer />} />
             <Route path="PoseTrainer" element={<PoseTrainer />} />
             <Route path="ToxicityTrainer" element={<ToxicityTrainer />} />
+            <Route path="text" element={<TextClassifier />} />
+            <Route path="AudioTrainer" element={<AudioModelTrainer />} />
+            <Route path="teachableposenet" element={<TeachablePoseNet />} />
           </Route>
         </Routes>
       </BrowserRouter>

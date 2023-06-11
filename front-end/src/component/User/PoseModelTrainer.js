@@ -1,204 +1,99 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from 'react';
+import * as tf from '@tensorflow/tfjs';
 import * as posenet from '@tensorflow-models/posenet';
-import '@tensorflow/tfjs';
+import Webcam from 'react-webcam';
+import { drawKeypoints, drawSkeleton } from './utilities';
 
-const PoseModelTrainer = () => {
+function PoseModelTrainer() {
+  const webcamRef = useRef(null);
+  const canvasRef = useRef(null);
 
-  const videoRef = useRef(null);
+  //  Load posenet
+  const runPosenet = async () => {
+    const net = await posenet.load({
+      inputResolution: { width: 640, height: 480 },
+      scale: 0.8
+    });
+    //
+    setInterval(() => {
+      detect(net);
+    }, 100);
+  };
 
-  
-  useEffect(() => {
-    const runPoseNet = async () => {
-      const net = await posenet.load();
-      const video = videoRef.current;
+  const detect = async (net) => {
+    if (typeof webcamRef.current !== 'undefined' && webcamRef.current !== null && webcamRef.current.video.readyState === 4) {
+      // Get Video Properties
+      const video = webcamRef.current.video;
+      const videoWidth = webcamRef.current.video.videoWidth;
+      const videoHeight = webcamRef.current.video.videoHeight;
 
-      const poseDetectionFrame = async () => {
-        // Ensure the video metadata has been loaded (e.g., dimensions).
-        if (
-          typeof video !== 'undefined' &&
-          video.readyState === 4
-        ) {
-          // Resize the video to the model's expected size.
-          const { videoWidth, videoHeight } = video;
-          video.width = videoWidth;
-          video.height = videoHeight;
+      // Set video width
+      webcamRef.current.video.width = videoWidth;
+      webcamRef.current.video.height = videoHeight;
 
-          // Estimate poses from the video element.
-          const poses = await net.estimatePoses(video, {
-            flipHorizontal: false,
-          });
+      // Make Detections
+      const pose = await net.estimateSinglePose(video);
+      console.log(pose);
 
-          // Use the poses as needed (e.g., draw them on a canvas).
-          console.log(poses);
-        }
+      drawCanvas(pose, video, videoWidth, videoHeight, canvasRef);
+    }
+  };
 
-        requestAnimationFrame(poseDetectionFrame);
-      };
+  const drawCanvas = (pose, video, videoWidth, videoHeight, canvas) => {
+    const ctx = canvas.current.getContext('2d');
+    canvas.current.width = videoWidth;
+    canvas.current.height = videoHeight;
 
-      poseDetectionFrame();
-    };
+    drawKeypoints(pose['keypoints'], 0.6, ctx);
+    drawSkeleton(pose['keypoints'], 0.7, ctx);
+  };
 
-    runPoseNet();
-  }, []);
+  runPosenet();
 
   return (
-    <>
-      <div className="d-flex mt-5">
-        <div>
-
-        <video ref={videoRef} autoPlay />
-        </div>
-        <div className="row w-100 m-0">
-          <div className="col-md-4">
-            <div
-              className="pb-3 text-center"
-              style={{ backgroundColor: "blue" }}
-            >
-              <h2>Upload Image</h2>
-            </div>
-            <div className="pb-3 d-flex justify-content-center mt-2 w-100">
-              <label for="formFileMultiple" className="form-label">
-                Multiple files input example
-              </label>
-              <input
-                className="form-control"
-                type="file"
-                id="formFileMultiple"
-                multiple
-              />
-            </div>
-
-            <div className="row">
-              <div className="col-lg-4 col-md-12 mb-4 mb-lg-0">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Boat on Calm Water"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain1.webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Wintry Mountain Landscape"
-                />
-              </div>
-
-              <div className="col-lg-4 mb-4 mb-lg-0">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain2.webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Mountains in the Clouds"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(73).webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Boat on Calm Water"
-                />
-              </div>
-
-              <div className="col-lg-4 mb-4 mb-lg-0">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/Nature/4-col/img%20(18).webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Waves at Sea"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Vertical/mountain3.webp"
-                  className="w-100 shadow-1-strong rounded mb-4"
-                  alt="Yosemite National Park"
-                />
-              </div>
-            </div>
+    <div className="App">
+      <div className="container">
+        <div className="card">
+          <div className="card-header">
+            <h3>Pose Model Trainer</h3>
           </div>
+          <div className="card-body">
+            <header className="App-header" style={{ height: '300px' }}>
+              <Webcam
+                ref={webcamRef}
+                style={{
+                  position: 'absolute',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  left: 0,
+                  right: 0,
+                  textAlign: 'center',
+                  zindex: 9,
+                  width: 640,
+                  height: 480
+                }}
+              />
 
-          <div className="col-md-8">
-            <div
-              className="col-lg-4 mb-4 mb-lg-0 text-center w-100 pb-3"
-              style={{ backgroundColor: "red" }}
-            >
-              <h2>class</h2>
-            </div>
-            <div className="row row-cols-4 g-3 pt-2">
-              <div className="col">
-                <div className="card">
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp"
-                    className="card-img-top"
-                    alt="Hollywood Sign on The Hill"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card">
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/042.webp"
-                    className="card-img-top"
-                    alt="Palm Springs Road"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card">
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/new/standard/city/043.webp"
-                    className="card-img-top"
-                    alt="Palm Springs Road"
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">Card title</h5>
-                    <p className="card-text">
-                      This is a longer card with supporting text below as a
-                      natural lead-in to additional content. This content is a
-                      little bit longer.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="card">
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/standard/city/050.webp"
-                  className="card-img-top"
-                  alt="Skyscrapers"
-                />
-                <div className="card-body">
-                  <h5 className="card-title">Card title</h5>
-                  <p className="card-text">
-                    This is a longer card with supporting text below as a
-                    natural lead-in to additional content. This content is a
-                    little bit longer.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <hr className="hr" />
-            <div className="row">
-              <div className="col text-center">
-                <h2>Traning process</h2>
-              </div>
-            </div>
+              <canvas
+                ref={canvasRef}
+                style={{
+                  position: 'absolute',
+                  marginLeft: 'auto',
+                  marginRight: 'auto',
+                  left: 0,
+                  right: 0,
+                  textAlign: 'center',
+                  zindex: 9,
+                  width: 640,
+                  height: 480
+                }}
+              />
+            </header>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-};
+}
 
 export default PoseModelTrainer;

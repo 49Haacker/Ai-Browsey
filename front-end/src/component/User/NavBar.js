@@ -41,7 +41,7 @@ const NavBar = () => {
         >
           <div className="offcanvas-header">
             <h5
-              className="offcanvas-title navLinkFontSize"
+              className="offcanvas-title navLinkFontSize text-white"
               id="offcanvasWithBothOptionsLabel"
             >
               AI Browsey
@@ -61,24 +61,29 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link
+                <a
                   className="nav-link text-white"
-                  to="/user/imagemodeltrainer/"
+                  href="http://localhost:5500"
                 >
-                  ImageModel Traner
-                </Link>
+                  ImageModel Trainer
+                </a>
               </li>
               <li className="nav-item">
                 <Link
                   className="nav-link text-white"
-                  to="/user/poseModelTrainer/"
+                  to="/user/poseModelTrainer"
                 >
                   Pose Model Trainer
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/user/poseTrainer/">
-                  Pose Trainer
+                <Link className="nav-link text-white" to="/user/text">
+                  ToxicityTrainer
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/user/AudioTrainer">
+                AudioTrainer
                 </Link>
               </li>
             </ul>

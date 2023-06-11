@@ -1,9 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import app_config from "../../config";
 
 const NavBar = () => {
+
+  const { themeColor, themeColorLight } = app_config;
+
   return (
-    <nav className="navbar sticky-top navWidthCstom" data-bs-theme="dark">
+    <nav className="navbar sticky-top navWidthCstom" data-bs-theme="dark" style={{backgroundColor: themeColor}}>
       <div className="container-fluid d-flex">
         {/* <Link className="navbar-brand text-white navLinkFontSize" to="/main/home/">
           AI Browsey
@@ -82,6 +86,11 @@ const NavBar = () => {
               <li className="nav-item">
                 <Link className="nav-link text-white" to="/main/signup/">
                   Sign-Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link text-white" to="/user/imageModelTrainer">
+                  Image Model Trainer
                 </Link>
               </li>
             </ul>
