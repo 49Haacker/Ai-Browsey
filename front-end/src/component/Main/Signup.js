@@ -164,7 +164,7 @@ const Signup = () => {
                         </button>
                       </div>
                       <p className="ms-4 small fw-bold mt-2 pt-1 mb-0 text-center">Already a user?{" "}
-                      <Link to='/main/signin'>SignIn</Link></p>
+                      <Link to='/main/login'>SignIn</Link></p>
                     </form>
                   </div>
                   <div className="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
