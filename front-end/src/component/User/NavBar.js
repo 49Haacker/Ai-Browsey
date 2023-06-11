@@ -63,7 +63,7 @@ const NavBar = () => {
               <li className="nav-item">
                 <a
                   className="nav-link text-white"
-                  href="http://localhost:5500"
+                  href="http://localhost:3001"
                 >
                   ImageModel Trainer
                 </a>
@@ -77,8 +77,8 @@ const NavBar = () => {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link text-white" to="/user/text">
-                  ToxicityTrainer
+                <Link className="nav-link text-white" to="/user/TextModelTrainer">
+                  Text Model Trainer
                 </Link>
               </li>
               <li className="nav-item">

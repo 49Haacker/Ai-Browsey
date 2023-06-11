@@ -37,11 +37,13 @@ const AudioModelTrainer = () => {
     const transferRecognizer = baseRecognizer.createTransfer('colors');
 
     if (wordToLearn.length > 3) {
-      await getSound(transferRecognizer, wordToLearn, nSamples);
+      await getSound(transferRecognizer, wordToLearn, numSec);
     }
 
-    await getSound(transferRecognizer, 'Beautiful Day', nSamples);
-    await getSound(transferRecognizer, '_background_noise_', nSamples);
+    await getSound(transferRecognizer, 'Beautiful Day', numSec);
+    await getSound(transferRecognizer, 'Good Morning', numSec);
+    await getSound(transferRecognizer, 'Bye', numSec);
+    await getSound(transferRecognizer, '_background_noise_', numSec);
 
     setConsoleLogs([...consoleLogs, 'Finished']);
     console.log('%c Finished ', 'background: #ccff99; color: black');
@@ -89,7 +91,7 @@ const AudioModelTrainer = () => {
 
   return (
     <div>
-      <main>
+      <main className='container'>
         <h1 className="display-4 text-center">Speech Recognition With TensorFlow.js</h1>
         <hr />
         <div className="card">
