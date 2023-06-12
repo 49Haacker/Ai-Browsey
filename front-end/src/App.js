@@ -13,7 +13,6 @@ import ImageModelTrainer from './component/User/ImageModelTrainer';
 import PoseTrainer from './component/User/PoseTrainer';
 import ModelBrowser from './component/Main/ModelBrowser';
 import PoseModelTrainer from './component/User/PoseModelTrainer';
-import AdminDashbord from './component/Admin/AdminDashbord';
 import ToxicityTrainer from './component/User/ToxicityTrainer';
 import Contact from './component/Main/Contact';
 import AudioModelTrainer from './component/User/AudioModelTrainer';
@@ -52,7 +51,7 @@ function App() {
                 }
               >
                 {/* <Route path="admin" element={<Navigate to="/admin/admindashboard" />} /> */}
-                <Route path="dashboard" element={<AdminDashbord />} />
+                {/* <Route path="dashboard" element={<AdminDashbord />} /> */}
                 <Route path="adminProfile" element={<AdminProfile />} />
                 <Route path="manageuser" element={<ManageUsers />} />
               </Route>
@@ -66,10 +65,10 @@ function App() {
                   </UserAuth>
                 }
               >
-                <Route path="imageModelTrainer" element={<ImageModelTrainer />} />
+                {/* <Route path="imageModelTrainer" element={<ImageModelTrainer />} /> */}
                 <Route path="poseModelTrainer" element={<PoseModelTrainer />} />
-                <Route path="PoseTrainer" element={<PoseTrainer />} />
-                <Route path="ToxicityTrainer" element={<ToxicityTrainer />} />
+                {/* <Route path="PoseTrainer" element={<PoseTrainer />} /> */}
+                {/* <Route path="ToxicityTrainer" element={<ToxicityTrainer />} /> */}
                 <Route path="TextModelTrainer" element={<TextClassifier />} />
                 <Route path="AudioTrainer" element={<AudioModelTrainer />} />
                 <Route path="teachableposenet" element={<TeachablePoseNet />} />

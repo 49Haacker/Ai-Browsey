@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="bColor">
-      <div className="container d-flex mt-3 w-75 flexRevrse">
+    <div className="HbColor pt-3 pb-3">
+      <div className="container d-flex w-75 flexRevrse">
         <div className="resHomePadding" style={{ padding: "0 113px" }}>
           <h1
             className="RfontSize"
@@ -220,7 +220,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
+
       <div
         className="container-lg d-flex justify-content-center align-items-center flex-column"
         style={{ marginTop: "17rem" }}

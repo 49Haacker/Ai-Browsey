@@ -16,7 +16,7 @@ const ManageUsers = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ minHeight: '80vh' }}>
       <div className="container">
         <p className="display-4 text-center">Manage User Data</p>
         <hr />

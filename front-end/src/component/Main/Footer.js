@@ -1,10 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
     <>
       <div>
-        <footer className="bg-light text-center text-white">
+        <footer className="text-center text-white" style={{ backgroundImage: 'linear-gradient(45deg, #505050, transparent)' }}>
           <div className="container p-2 pb-0">
             <section className="mb-4">
               <a
@@ -37,18 +38,18 @@ const Footer = () => {
                 href="#!"
                 role="button"
               ><i className="fab fa-linkedin-in d-flex"></i></a>
-              <a
+              <Link
                 className="btn btn-primary btn-floating m-1 rounded-circle"
                 style={{ backgroundColor: '#333333' }}
-                href="#!"
+                to="#!"
                 role="button"
-              ><i className="fab fa-github d-flex"></i></a>
+              ><i className="fab fa-github d-flex"></i></Link>
             </section>
 
           </div>
           <div className="text-center p-3" style={{ backgroundColor: 'rgb(0 0 0 / 46%)' }}>
             © 2020 Copyright:
-            <a className="text-white" href="https://mdbootstrap.com/">AIBrowsey.com</a>
+            <Link className="text-white" to="/main/home/">AIBrowsey.com</Link>
           </div>
 
         </footer>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const ModelBrowser = () => {
   return (
     <>
-      <div className="container-fluid d-flex justify-content-center flex-column" style={{ marginTop: '9rem' }}>
+      <div className="container-fluid d-flex justify-content-center flex-column pb-3" style={{ minHeight: '80vh', backgroundImage: 'linear-gradient(45deg, #3030309c, transparent)' }}>
         <h1 className="fw-bolder text-center" style={{ fontSize: '4em' }}>
           Select Model to Train
         </h1>
@@ -12,7 +12,7 @@ const ModelBrowser = () => {
           <div className="row">
             <div className="col-md-3">
               <a href="http://localhost:3001" className="text-decoration-none text-black">
-                <div className="card">
+                <div className="card h-100">
                   <img src="https://docs-assets.developer.apple.com/published/981240227d/c0ddbd6a-b60d-4a32-9726-6a9df5d7fbb9.png" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h2>Image Model</h2>
@@ -23,7 +23,7 @@ const ModelBrowser = () => {
             </div>
             <div className="col-md-3">
               <Link to="/user/TextModelTrainer/" className="text-decoration-none text-black">
-                <div className="card">
+                <div className="card h-100">
 
                   <img src="https://miro.medium.com/v2/resize:fit:1200/1*PIs25RW-zFYGalzlzgdI9A.jpeg" className="card-img-top" alt="..." />
                   <div className="card-body">
@@ -35,7 +35,7 @@ const ModelBrowser = () => {
             </div>
             <div className="col-md-3">
               <Link to="/user/PoseModelTrainer/" className="text-decoration-none text-black">
-                <div className="card">
+                <div className="card h-100">
                   <img src="https://media.licdn.com/dms/image/D5612AQHW5HtOxoRKlg/article-cover_image-shrink_600_2000/0/1681285456609?e=2147483647&v=beta&t=hZKdxdeOaAJbBjOp131sQmdmw79Kl-CG2Lt9uQCOfN8" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h2>Pose Model</h2>
@@ -46,7 +46,7 @@ const ModelBrowser = () => {
             </div>
             <div className="col-md-3">
               <Link to="/user/AudioTrainer" className="text-decoration-none text-black">
-                <div className="card">
+                <div className="card h-100">
                   <img src="https://images.ctfassets.net/3viuren4us1n/7MmrorOl3fJ8QhDi6jxrpW/1bd31debd4111a143bd48e2d75e394f8/audio_classification.jpg" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h2>Audio Speech Model</h2>

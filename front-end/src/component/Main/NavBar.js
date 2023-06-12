@@ -30,15 +30,15 @@ const NavBar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ backgroundImage: 'linear-gradient(45deg, rgb(171 166 166), #f9f9f9fa)' }}>
         {/* Container wrapper */}
         <div className="container">
           {/* Navbar brand */}
-          <NavLink className="navbar-brand me-2" to="/main/home">
+          <NavLink className="navbar-brand me-2 " style={{ marginLeft: '3rem' }} to="/main/home">
             <Logo title={'AI Browsy'} />
           </NavLink>
           {/* Toggle button */}
-          <button
+          {/* <button
             className="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
@@ -48,7 +48,8 @@ const NavBar = () => {
             aria-label="Toggle navigation"
           >
             <i className="fas fa-bars" />
-          </button>
+          </button> */}
+
           {/* Collapsible wrapper */}
           <div className="collapse navbar-collapse" id="navbarButtonsExample">
             {/* Left links */}

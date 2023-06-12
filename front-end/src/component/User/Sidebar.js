@@ -7,43 +7,45 @@ const Sidebar = () => {
   return (
     <Menu>
       <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/user/profile">
-          User Profile
+        <NavLink id="profile" className="menu-item" to="/Main/Home/">
+          Home
         </NavLink>
       </div>
       <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/user/configure">
-          Configure Dashboard
-        </NavLink>
-      </div>
-      <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/user/addentity">
-          Add Entity 
-        </NavLink>
-      </div>
-      <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/user/manageentity">
-          Manage Entity
-        </NavLink>
-      </div>
-      <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/user/addentitydata">
-          Add Entity Data
-        </NavLink>
-      </div>
-      
-      <div className="sidebar-item">
-        <a id="dashboard" className="menu-item" href="http://localhost:3001/dashboard/app">
-          View Mobile dashboard
+        <a id="profile" className="menu-item" href="http://localhost:3001/">
+          Image Model Trainer
         </a>
       </div>
-      <div className="sidebar-item">
-        <NavLink id="profile" className="menu-item" to="/main/Price">
-          Price
+      {/* <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/PoseModelTrainer/">
+          Pose Model Trainer
         </NavLink>
       </div>
-      
-      
+      <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/PoseTrainer/">
+          Pose Trainer
+        </NavLink>
+      </div>
+      <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/ToxicityTrainer/">
+        ToxicityTrainer
+        </NavLink>
+      </div> */}
+      <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/textModelTrainer/">
+          Text Classifier
+        </NavLink>
+      </div>
+      <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/poseModelTrainer/">
+          Pose Model
+        </NavLink>
+      </div>
+      <div className="sidebar-item">
+        <NavLink id="profile" className="menu-item" to="/user/AudioTrainer/">
+          Audio Model Trainer
+        </NavLink>
+      </div>
     </Menu>
   );
 };

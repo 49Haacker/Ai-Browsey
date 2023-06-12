@@ -72,7 +72,7 @@ const AdminProfile = () => {
   });
 
   return (
-    <div className="full-page" style={{ backgroundColor: themeColorLight }}>
+    <div className="full-page" style={{ minHeight: '80vh', backgroundImage: 'linear-gradient(45deg, #505050, transparent)' }}>
       <div className="container py-5">
         <div className="row">
           <div className="col-md-8 mb-4">

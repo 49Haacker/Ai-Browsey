@@ -5,19 +5,19 @@ import { useUserContext } from '../Context/UserProvider';
 
 const NavBar = () => {
 
-  const {loggedIn, setLoggedIn, logout} = useUserContext();
+  const { loggedIn, setLoggedIn, logout } = useUserContext();
 
   const showLogginOption = () => {
-    if(loggedIn){
+    if (loggedIn) {
       return <button className="btn btn-danger px-3 me-2" onClick={logout}>Logout </button>
-    }else{
+    } else {
       return <>
         <NavLink to="/main/login" type="button" className="btn btn-link px-3 me-2">
-                Login
-              </NavLink>
-              <NavLink to="/main/signup" className="btn btn-primary me-3">
-                Sign up for free
-              </NavLink>
+          Login
+        </NavLink>
+        <NavLink to="/main/signup" className="btn btn-primary me-3">
+          Sign up for free
+        </NavLink>
       </>
     }
   }
@@ -25,7 +25,7 @@ const NavBar = () => {
   return (
     <>
       {/* Navbar */}
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ backgroundImage: 'linear-gradient(45deg, rgb(171 166 166), #f9f9f9fa)' }}>
         {/* Container wrapper */}
         <div className="container">
           {/* Navbar brand */}
@@ -57,7 +57,7 @@ const NavBar = () => {
             {/* Left links */}
             <div className="d-flex align-items-center">
               {showLogginOption()}
-             
+
             </div>
           </div>
           {/* Collapsible wrapper */}
