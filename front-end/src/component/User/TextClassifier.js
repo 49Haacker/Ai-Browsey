@@ -7,7 +7,7 @@ const TextClassifier = () => {
   const [classes, setClasses] = useState([
     {
       name: 'Untitled 1',
-      textArray: ['']
+      textArray: []
     }
   ]);
 
@@ -18,6 +18,8 @@ const TextClassifier = () => {
   const [testText, setTestText] = useState('');
 
   const [selEpoch, setSelEpoch] = useState(200);
+
+  const [modelTraining, setModelTraining] = useState(false);
 
   const encodeData = (data) => {
     const sentences = data.map((comment) => comment.text.toLowerCase());
@@ -146,6 +148,7 @@ const TextClassifier = () => {
   };
 
   const trainModel = () => {
+    setModelTraining(true);
     const model = tf.sequential();
 
     // Add layers to the model
@@ -191,6 +194,7 @@ const TextClassifier = () => {
           setTrainedModel(model);
           setModelTrained(true);
           // model.predict(testing_data).print();
+          setModelTraining(false);
         });
       })
       .catch((err) => console.log('Prom Err:', err));
@@ -235,6 +239,24 @@ const TextClassifier = () => {
     setClasses(temp);
   };
 
+  const getTextFromClipboard = (index) => {
+    console.log(index);
+    navigator.clipboard.readText().then((clipText) => {
+      console.log(clipText);
+      const temp = classes[index];
+      console.log(temp);
+      temp.textArray = [...temp.textArray, ...clipText.split('\n').map(t => t.trim()).slice(0, -1)];
+      console.log(temp);
+      if(index === 0) {
+        setClasses([temp, ...classes.slice(index + 1)]);
+      }else{
+        setClasses([...classes.slice(0, index), temp, ...classes.slice(index+1)]);
+      }
+      // temp[0].textArray.push(clipText);
+      // setClasses(temp);
+    });
+  }
+
   return (
     <div style={{ backgroundImage: `url('https://wallpapers.com/images/hd/minimalist-abstract-ibin54chkget0go9.jpg')` }}>
       <div className="container py-5">
@@ -262,11 +284,11 @@ const TextClassifier = () => {
                         <input onChange={(e) => changeText(index, e.target.value)} className="form-control" />
                       </div>
                     </div>
-                    <div className="card-body">
-                      {obj.textArray.map((text, tindex) => (
+                    <div className="card-body" style={{height: 300, overflow: 'auto'}}>
+                      {obj.textArray && obj.textArray.map((text, tindex) => (
                         <div className="row my-3">
                           <div className="col">
-                            <input className="form-control" onChange={(e) => updateArrayText(index, tindex, e.target.value)} />
+                            <input className="form-control" value={text} onChange={(e) => updateArrayText(index, tindex, e.target.value)} />
                           </div>
                           <div className="col-2">
                             <button className="btn btn-danger" onClick={(e) => removeText(index, tindex)}>
@@ -276,12 +298,17 @@ const TextClassifier = () => {
                         </div>
                       ))}
                       <div className="d-flex mt-3">
-                        <div className="col">
+                        <div className="col-4">
                           <button className="btn btn-primary" onClick={(e) => addText(index)}>
-                            Add Text Sample to this Class
+                            Add Text
                           </button>
                         </div>
-                        <div className="col-2">
+                        <div className="col-4">
+                          <button className="btn btn-primary" onClick={e => getTextFromClipboard(index)}>
+                            Clipboard
+                          </button>
+                        </div>
+                        <div className="col-4">
                           <button className="btn btn-outline-danger" onClick={(e) => removeClass(index)}>
                             <i class="fas fa-trash-alt    "></i>
                           </button>
@@ -301,8 +328,8 @@ const TextClassifier = () => {
         </div>
         <div className="card mt-4">
           <div className="card-body">
-            <button className="btn btn-primary btn-lg w-100 my-4" onClick={trainModel} disabled={classes.length < 2}>
-              <i class="fas fa-rocket    "></i> Train Model
+            <button disabled={modelTraining && (classes.length < 2)} className="btn btn-primary btn-lg w-100 my-4" onClick={trainModel}>
+              <i class="fas fa-rocket"></i> {modelTraining ? 'Training Model...' : 'Train Model'}
             </button>
             <h3 className="text-success text-center">{modelTrained && 'Model has been Trained Successfully!!'}</h3>
             <label className="mt-3 h2">Test Model</label>
