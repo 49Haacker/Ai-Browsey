@@ -33,7 +33,7 @@ function PoseModelTrainer() {
 
       // Make Detections
       const pose = await net.estimateSinglePose(video);
-      console.log(pose);
+      // console.log(pose);
 
       drawCanvas(pose, video, videoWidth, videoHeight, canvasRef);
     }

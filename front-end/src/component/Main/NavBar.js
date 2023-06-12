@@ -30,7 +30,7 @@ const NavBar = () => {
             {/* Left links */}
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <NavLink className="nav-link" to="/main/browse">
+                <NavLink className="nav-link" to="/main/browser">
                   Browse AI Models
                 </NavLink>
               </li>
