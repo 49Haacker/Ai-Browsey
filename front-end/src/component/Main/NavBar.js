@@ -1,8 +1,32 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../Logo';
+import { useUserContext } from '../Context/UserProvider';
 
 const NavBar = () => {
+  const { loggedIn, setLoggedIn, logout } = useUserContext();
+
+  const showLogginOption = () => {
+    if (loggedIn) {
+      return (
+        <button className="btn btn-danger px-3 me-2" onClick={logout}>
+          Logout{' '}
+        </button>
+      );
+    } else {
+      return (
+        <>
+          <NavLink to="/main/login" type="button" className="btn btn-link px-3 me-2">
+            Login
+          </NavLink>
+          <NavLink to="/main/signup" className="btn btn-primary me-3">
+            Sign up for free
+          </NavLink>
+        </>
+      );
+    }
+  };
+
   return (
     <>
       {/* Navbar */}
@@ -37,15 +61,7 @@ const NavBar = () => {
             </ul>
             {/* Left links */}
             <div className="d-flex align-items-center">
-              <NavLink to="/main/login" type="button" className="btn btn-link px-3 me-2">
-                Login
-              </NavLink>
-              <NavLink to="/main/signup" className="btn btn-primary me-3">
-                Sign up for free
-              </NavLink>
-              <a className="btn btn-dark px-3" href="https://github.com/mdbootstrap/mdb-ui-kit" role="button">
-                <i className="fab fa-github" />
-              </a>
+              {showLogginOption()}
             </div>
           </div>
           {/* Collapsible wrapper */}

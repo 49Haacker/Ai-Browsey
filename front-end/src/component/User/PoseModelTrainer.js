@@ -51,15 +51,17 @@ function PoseModelTrainer() {
   runPosenet();
 
   return (
-    <div className="App">
-      <div className="container">
+    <div className="App" style={{minHeight: '100vh'}}>
+      <div className="container py-5">
         <div className="card">
           <div className="card-header">
             <h3>Pose Model Trainer</h3>
           </div>
           <div className="card-body">
-            <header className="App-header" style={{ height: '300px' }}>
-              <Webcam
+            <header className="App-header" style={{ height: '500px' }}>
+              <div className="row">
+                <div className="col-md-6">
+                <Webcam
                 ref={webcamRef}
                 style={{
                   position: 'absolute',
@@ -88,6 +90,10 @@ function PoseModelTrainer() {
                   height: 480
                 }}
               />
+                </div>
+                <div className="col-md-6"></div>
+              </div>
+              
             </header>
           </div>
         </div>

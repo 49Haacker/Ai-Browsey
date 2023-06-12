@@ -13,6 +13,8 @@ app.use(express.json());
 app.use('/user', userRouter);
 app.use('/util', utilRouter);
 
+app.use(express.static('./static/uploads'));
+
 app.get('/', (req, res) => {
     res.send('Working fine');
 });

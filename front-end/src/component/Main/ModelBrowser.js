@@ -5,7 +5,7 @@ const ModelBrowser = () => {
   return (
     <>
       <div className="container-fluid d-flex justify-content-center flex-column" style={{ marginTop: '9rem' }}>
-        <h1 className="fw-bolder " style={{ fontSize: '4em' }}>
+        <h1 className="fw-bolder text-center" style={{ fontSize: '4em' }}>
           Select Model to Train
         </h1>
         <div className="container-fluid mt-5">
