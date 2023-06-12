@@ -24,6 +24,7 @@ import UserProvider from './component/Context/UserProvider';
 import AdminAuth from './auth/AdminAuth';
 import UserAuth from './auth/UserAuth';
 import ManageUsers from './component/Admin/ManageUser';
+import UserProfile from './component/User/UserProfile';
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
                 <Route path="TextModelTrainer" element={<TextClassifier />} />
                 <Route path="AudioTrainer" element={<AudioModelTrainer />} />
                 <Route path="teachableposenet" element={<TeachablePoseNet />} />
+                <Route path="profile" element={<UserProfile />} />
               </Route>
             </Routes>
           </UserProvider>

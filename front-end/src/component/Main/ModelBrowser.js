@@ -11,7 +11,7 @@ const ModelBrowser = () => {
         <div className="container-fluid mt-5">
           <div className="row">
             <div className="col-md-3">
-              <Link to="/user/imageModelTrainer/" className="text-decoration-none text-black">
+              <a href="http://localhost:3001" className="text-decoration-none text-black">
                 <div className="card">
                   <img src="https://docs-assets.developer.apple.com/published/981240227d/c0ddbd6a-b60d-4a32-9726-6a9df5d7fbb9.png" className="card-img-top" alt="..." />
                   <div className="card-body">
@@ -19,12 +19,12 @@ const ModelBrowser = () => {
                     <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                   </div>
                 </div>
-              </Link>
+              </a>
             </div>
             <div className="col-md-3">
-              <Link to="/user/ToxicityTrainer/" className="text-decoration-none text-black">
+              <Link to="/user/TextModelTrainer/" className="text-decoration-none text-black">
                 <div className="card">
-                
+
                   <img src="https://miro.medium.com/v2/resize:fit:1200/1*PIs25RW-zFYGalzlzgdI9A.jpeg" className="card-img-top" alt="..." />
                   <div className="card-body">
                     <h2>Toxicity Model</h2>
