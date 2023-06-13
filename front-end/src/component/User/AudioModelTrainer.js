@@ -10,9 +10,9 @@ const AudioModelTrainer = () => {
   const [numSec, setnumSec] = useState(10);
 
   useEffect(() => {
-      document.getElementById('console').innerHTML = consoleLogs.join('<br/>');
+    document.getElementById('console').innerHTML = consoleLogs.join('<br/>');
   }, [consoleLogs])
-  
+
 
   async function getSound(recognizer, word, count) {
     for (let i = 0; i < count; i += 1) {
@@ -48,10 +48,10 @@ const AudioModelTrainer = () => {
     setConsoleLogs([...consoleLogs, 'Finished']);
     console.log('%c Finished ', 'background: #ccff99; color: black');
 
-    
+
     console.table(transferRecognizer.countExamples());
 
-    
+
     setConsoleLogs([...consoleLogs, 'Training...']);
     console.log('%c Training... ', 'background: #ffcccc; color: black');
     await transferRecognizer.train({
@@ -90,7 +90,7 @@ const AudioModelTrainer = () => {
   }
 
   return (
-    <div>
+    <div style={{ minHeight: '80vh' }}>
       <main className='container'>
         <h1 className="display-4 text-center">Speech Recognition With TensorFlow.js</h1>
         <hr />
@@ -104,12 +104,12 @@ const AudioModelTrainer = () => {
             <div className="input">
               <div className='row'>
                 <div className='col-6'>
-              <label>Type the word to Train Speech</label>
-              <input className='form-control' type="text" name="word" placeholder="Enter a word or phrase" onChange={(e) => setWord(e.target.value)} value={word} />
+                  <label>Type the word to Train Speech</label>
+                  <input className='form-control' type="text" name="word" placeholder="Enter a word or phrase" onChange={(e) => setWord(e.target.value)} value={word} />
                 </div>
                 <div className='col-6'>
-              <label>Samples to take</label>
-              <input type='number' onChange={e => setnumSec(parseInt(e.target.value))} className='form-control' />
+                  <label>Samples to take</label>
+                  <input type='number' onChange={e => setnumSec(parseInt(e.target.value))} className='form-control' />
                 </div>
               </div>
               <button onClick={go} className='btn btn-danger mt-4'> <i class="fas fa-ear"></i> Start Listening</button>
